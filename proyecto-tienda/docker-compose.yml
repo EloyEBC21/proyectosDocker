@@ -16,3 +16,6 @@ services:
     - "8080:80"
   # ESTO HACE QUE EL PUERTO 8080 DE TU MÁQUINA SE CONECTE AL PUERTO
   # 80 DEL CONTENETOR
+ db:
+  image: mysql:5.7
+  

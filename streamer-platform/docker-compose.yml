@@ -7,10 +7,10 @@ services:
   container_name: streamer-db
   restart: always
   environment:
-  MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
-  MYSQL_DATABASE: ${DB_NAME}
-  MYSQL_USER: ${DB_USER}
-  MYSQL_PASSWORD: ${DB_PASS}
+    MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+    MYSQL_DATABASE: ${DB_NAME}
+    MYSQL_USER: ${DB_USER}
+    MYSQL_PASSWORD: ${DB_PASS}
   volumes:
    - mysql_data:/var/lib/mysql # Persistencia crítica
   networks:
@@ -18,34 +18,34 @@ services:
  # ---------------------------------------------------
  # SERVICIO 2: EL ESCENARIO (Plataforma Web Ghost)
  # ---------------------------------------------------
-ghost-app:
- image: ghost:5-alpine
- container_name: streamer-web
- restart: on-failure
- depends_on:
-  - database
- ports:
-  - "8080:2368" # Accedemos desde el puerto 8080 de nuestro PC
- environment:
- # Configuración para que Ghost hable con MySQL
- database__client: mysql
- database__connection__host: database # Nombre del servicio de arriba
- database__connection__user: ${DB_USER}
- database__connection__password: ${DB_PASS}
- database__connection__database: ${DB_NAME}
- url: http://localhost:8080
- volumes:
-   - ghost_content:/var/lib/ghost/content # Para guardar imágenes y temas
- networks:
-   - backend-net # Para hablar con la DB
-   - frontend-net # Para hablar con el mundo (Internet)
+ ghost-app:
+  image: ghost:5-alpine
+  container_name: streamer-web
+  restart: on-failure
+  depends_on:
+   - database
+  ports:
+   - "8080:2368" # Accedemos desde el puerto 8080 de nuestro PC
+  environment:
+  # Configuración para que Ghost hable con MySQL
+    database__client: mysql
+    database__connection__host: database # Nombre del servicio de arriba
+    database__connection__user: ${DB_USER}
+    database__connection__password: ${DB_PASS}
+    database__connection__database: ${DB_NAME}
+    url: http://localhost:8080
+  volumes:
+    - ghost_content:/var/lib/ghost/content # Para guardar imágenes y temas
+  networks:
+    - backend-net # Para hablar con la DB
+    - frontend-net # Para hablar con el mundo (Internet)
 # ---------------------------------------------------
 # DEFINICIÓN DE INFRAESTRUCTURA
 # ---------------------------------------------------
 networks:
  frontend-net: # Red pública
  backend-net: # Red privada (seguridad)
- internal: true
+  y comiencinternal: true
 volumes:
  mysql_data: # Volumen nombrado para la DB
  ghost_content: # Volumen nombrado para las fotos del blog

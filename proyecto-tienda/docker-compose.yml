@@ -18,4 +18,14 @@ services:
   # 80 DEL CONTENETOR
  db:
   image: mysql:5.7
-  
+  container_name: db
+  restart: on_failure
+  environment:
+    MYSQL_ROOT_PASSWORD: superadmin
+    MYSQL_DATABASE: tienda_db
+    MYSQL_USER: eloy
+    MYSQL_PASSWORD: 12345eloy
+  volumes:
+   - mysql_data:/var/lib/mysql # Persistencia crítica
+  networks:
+   - backend-net

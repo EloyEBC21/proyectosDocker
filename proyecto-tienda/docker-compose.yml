@@ -23,9 +23,15 @@ services:
   environment:
     MYSQL_ROOT_PASSWORD: superadmin
     MYSQL_DATABASE: tienda_db
-    MYSQL_USER: eloy
-    MYSQL_PASSWORD: 12345eloy
   volumes:
    - mysql_data:/var/lib/mysql # Persistencia crítica
+ phpmyadmin:
+  image: phpmyadmin/phpmyadmin
   networks:
-   - backend-net
+    - "8081:80"
+  depends_on: # Espera a que el servicio "db" esté listo
+    - db
+  environment:
+   # Indicamos a phpMyAdmin a qué servidor conectarse:
+    PMA_HOST: db
+    PMA_SRBITRARY: 1

@@ -1,20 +1,20 @@
-ervices:
+services:
  # ---------------------------------------------------
  # SERVICIO 1: LA CÁMARA ACORAZADA (Base de Datos)
  # ---------------------------------------------------
  database:
- image: mysql:8.0
- container_name: streamer-db
- restart: always
- environment:
- MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
- MYSQL_DATABASE: ${DB_NAME}
- MYSQL_USER: ${DB_USER}
- MYSQL_PASSWORD: ${DB_PASS}
- volumes:
- - mysql_data:/var/lib/mysql # Persistencia crítica
- networks:
- - backend-net # ¡OJO! Solo conectada a la red privada
+  image: mysql:8.0
+  container_name: streamer-db
+  restart: always
+  environment:
+  MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+  MYSQL_DATABASE: ${DB_NAME}
+  MYSQL_USER: ${DB_USER}
+  MYSQL_PASSWORD: ${DB_PASS}
+  volumes:
+   - mysql_data:/var/lib/mysql # Persistencia crítica
+  networks:
+   - backend-net # ¡OJO! Solo conectada a la red privada
  # ---------------------------------------------------
  # SERVICIO 2: EL ESCENARIO (Plataforma Web Ghost)
  # ---------------------------------------------------

@@ -1,0 +1,18 @@
+services:
+ php:
+  image: php:7.4-apache   # COJE LA IMAGEN, en este caso es "php:7.4-apache" 
+  container_name: web     # EL NOMBRE DEL SERVICIO
+  restart: always         # CADA VEZ QUE ARRANQUE SE REINICIA
+  build:                  
+  # "build" INDICA QUE LA IMAGEN DE ESTE SERVICIO SE DEBE CONSTRUIR
+  #  A PARTIR DE UN DOCKERFILE PERSONALIZADO
+    context: ./php        # DEFINE LA CARPETA DONDE DOCKER BUSCARÁ
+    dockerfile: ./php.Dockerfile
+  volumes:                # MONTA UN VOLUMEN ENTRE TU MAQUINA Y EL CONTENEDOR
+    - ./php/:/var/www/html
+  # ESTO HACE QUE LA CARPETA ./PHP DE TU MÁQUINA LOCAL SE MONTARÁ DENTRO DEL CONTENEDOR
+  # EN LA RUTA "/user/src/myapp"
+  ports:
+    - "8080:80"
+  # ESTO HACE QUE EL PUERTO 8080 DE TU MÁQUINA SE CONECTE AL PUERTO
+  # 80 DEL CONTENETOR

@@ -45,7 +45,7 @@ services:
 networks:
  frontend-net: # Red pública
  backend-net: # Red privada (seguridad)
-  y comiencinternal: true
+  internal: true
 volumes:
  mysql_data: # Volumen nombrado para la DB
  ghost_content: # Volumen nombrado para las fotos del blog

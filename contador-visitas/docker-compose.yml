@@ -1,0 +1,15 @@
+services:
+  db:
+    image: redis:alpine
+    volumes:
+      - datos-visitas/:/data
+
+  web:
+    build: .
+    ports:
+      - "80:500"
+    depends_on:
+      - db
+
+volumes:
+  datos-visitas:
